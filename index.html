@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RST航天 - 星际探索领导者</title>
+    <style>
+        :root {
+            --space-blue: #0a1931;
+            --nebula-purple: #6a1b9a;
+            --rocket-red: #d32f2f;
+            --star-gold: #ffd700;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, var(--space-blue) 30%, var(--nebula-purple));
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 49, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            width: 180px;
+            filter: drop-shadow(0 0 10px var(--star-gold));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .mission-input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--star-gold);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.2rem;
+            margin: 50px 0;
+        }
+
+        .mission-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .section {
+                padding: 80px 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1>Rover  Space</h1>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">首页</a>
+                <a href="#missions" class="nav-link">太空任务</a>
+                <a href="#technology" class="nav-link">核心技术</a>
+                <a href="#gonkaiziliao" class="nav-link">公开资料</a>
+                <a href="#contact" class="nav-link">联系我们</a>
+                <a href="#hezuoshiy" class="nav-link">合作事业</a>
+                <a href="#jiaruwomen" class="nav-link">加入我们</a>
+                <p>已登录</p>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="section">
+        <div class="section-card">
+            <h1>RST航天</h1>
+            <p>RST航天专注于近地、太空、地卫（DFY）开发火箭的项目。</p>
+            <p>成立于2025年2月10日。</p>
+            <p>RST在航天工程中获得了多项成就。</p>
+        <section id="home" class="section">
+            <div class="section-card">
+                <h2>当前项目</h2>
+                <p>1. RST参宿-1型重型火箭（第5次试车）</p>
+                <p>2. RST武卒-28型地卫（DFY）行星火箭（研制中）</p>
+                <p>3. RST相柳-ST型智能化卫星轨道防御系统（已立项）</p>
+                <p>4. RST震爆-RER型震爆发动机（已立项）</p>
+            </div>
+    </section>
+    </textarea>
+</div>
+            <section id="missions" class="section">
+        <div class="section-card">
+            <h2>当前进行中任务</h2>
+            <p>1. RST参宿-1 • 发动机试车 • 主体构建</p>
+            <p>2. RST武卒-28（DFY） • 已立项 • 爆震发动机构建</p>
+        </div>
+    </section>
+
+     <section id="technology" class="section">
+          <div class="section-card">
+             <h2>核心技术</h2>
+              <p>1. 爆震一级推进系统（DX）</p>
+              <p>2. DeepSeek-R1主控矩阵（DSP）</p>
+              <p>3. 立式回收系统</p>
+              <p>4. 超迷你型发动机（脉冲）</p>
+              <p>5. 电离子卫星发动机</p>
+             </div>
+         </section>
+
+    <section id="gonkaiziliao" class="section">
+          <div class="section-card">
+             <p>公开资料</p>
+             <a href=https://pan.baidu.com/s/1KkG-8OTydaZNxq0nCA-ONw?pwd=2828>
+                <button>RST参宿-1</button>
+                </a>
+            <a href=https://pan.baidu.com/s/10Jeu34veJZoghh3xngnC6Q?pwd=2828>
+                <button>RST参宿-1(diy)</button>
+                </a>
+            <a href=https://pan.baidu.com/s/12djHH0MJSbPEY3jGSRwu8g?pwd=2828>
+                <button>RST武卒-28（DFY）(diy)</button>
+                </a>
+             </div>
+         </section>
+
+         <section id="hezuoshiy" class="section">
+            <div class="section-card">
+                <h1>当前合作社：</h1>
+                <p>1. FAF航天（夕阳红航天）</p>
+            </div>
+    </section>
+
+    <section id="jiaruwomen" class="section">
+        <div class="section-card">
+            <h2>加入我们</h2>
+            <p>邮箱：liujunkaiqianyuyouzhen@Outlook.com</p>
+            <p>（请发送“加入RST”并附上电话或者邮箱）</p>
+            <p>官网：https://rover2828.github.io/RST/#jiaruwomen</p>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="section-card">
+            <h2>联系我们</h2>
+            <p>邮箱：liujunkaiqianyuyouzhen@Outlook.com </p>
+            <p>电话：18759122968</p>
+            <p>官网：https://rover2828.github.io/RST/</p>
+        </div>
+    </section>
+
+    
+    <script>
+        // 导航栏平滑滚动
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // 更新URL哈希
+                    history.pushState(null, null, targetId);
+                }
+            });
+        });
+
+        // 自动激活当前可见区块
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${section.id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
