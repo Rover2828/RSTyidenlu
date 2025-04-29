@@ -121,9 +121,21 @@
                 <a href="#contact" class="nav-link">联系我们</a>
                 <a href="#hezuoshiy" class="nav-link">合作事业</a>
                 <a href="#jiaruwomen" class="nav-link">加入我们</a>
-                <a alert(`确定退出？ ${user.username}`); href=https://rover2828.github.io/RST>
-                    <button>已登录</button>
-                    </a>
+                <button onclick="handleRedirect()">
+                    已登录
+                 </button>
+                
+                <script>
+                        // 函数式处理（推荐）
+                    function handleRedirect() {
+                        if(confirm("确定要退出登录？")) {
+                                // 当前窗口跳转
+                            window.location.href = "https://rover2828.github.io/RST";
+                                
+                               
+                            }
+                        }
+                    </script>
             </div>
         </div>
     </nav>
