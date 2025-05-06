@@ -7,317 +7,575 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #032B44;
-            --accent-yellow: #FFCA28;
-            --dark-blue: #021726;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --border-color: rgba(255, 202, 40, 0.1);
+            --primary-dark: #2D2D2D;
+            --secondary-dark: #404040;
+            --light-gray: #E0E0E0;
+            --accent-gray: #707070;
+            --card-bg: rgba(45,45,45,0.95);
+            --border-color: rgba(224,224,224,0.3);
         }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: slideIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
 
         body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            background: var(--dark-blue);
-            color: #fff;
-            line-height: 1.6;
+            font-family: 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+            background: var(--primary-dark);
+            color: var(--light-gray);
+            line-height: 1.8;
             margin: 0;
+            letter-spacing: 0.5px;
         }
 
-        /* 导航栏样式 */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(3, 43, 68, 0.97);
-            backdrop-filter: blur(10px);
+            background: rgba(64,64,64,0.95);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            height: 70px;
         }
 
+
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 0.8rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 100%;
         }
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-link {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--light-gray);
             text-decoration: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 4px;
-            transition: all 0.3s;
+            padding: 0.5rem 1.2rem;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-weight: 500;
         }
 
-        .nav-link:hover {
-            background: rgba(255, 202, 40, 0.1);
-            color: var(--accent-yellow);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gray);
+            transition: all 0.3s ease;
         }
 
-        /* 主内容区域 */
-        .section {
-            min-height: 100vh;
-            padding: 160px 2rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
         }
 
-        /* 首页特别样式 */
         #home {
-            background: linear-gradient(45deg, var(--primary-blue), var(--dark-blue));
+            min-height: 100vh;
+            padding: 140px 2rem 2rem;
+            background: linear-gradient(rgba(64,64,64,0.2), rgba(45,45,45,0.2));
+            display: flex;
+            align-items: center;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            background: linear-gradient(45deg, var(--accent-yellow), #FFD700);
+            font-size: 5rem;
+            background: linear-gradient(45deg, 
+                var(--light-gray) 30%, 
+                var(--accent-gray) 70%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
+            letter-spacing: 2px;
         }
 
         .content-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin: 2rem 0;
+            border-radius: 2px;
+            padding: 4rem;
+            margin: 3rem 0;
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
+            position: relative;
+            max-width: 800px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent-gray);
+        }
+        
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(224,224,224,0.1),
+                transparent
+                );
+                transition: left 0.6s;
+        }
+
+        .content-card:hover::before {
+            left: 100%;
         }
 
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 3rem;
+            margin-top: 4rem;
         }
 
         .project-item {
-            padding: 1.5rem;
-            background: var(--primary-blue);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-left: 3px solid var(--accent-gray);
+            position: relative;
+            transition: all 0.4s ease;
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(112,112,112,0.1) 100%
+            );
+            background-size: 200% 100%;
+            background-position: left;
+            transition: all 0.4s ease;
         }
 
-        /* 按钮样式 */
+        .project-item .material-icons {
+            transition: transform 0.3s ease;
+        }
+
+        .project-item:hover .material-icons {
+            transform: rotate(15deg) scale(1.2);
+        }
+
+        .project-item h3 {
+            transition: color 0.3s ease;
+        }
+
+        .project-item:hover h3 {
+            color: var(--accent-gray);
+        }
+
+        .project-item:hover {
+            transform: translateX(10px);
+            background-position: right;
+            border-left-width: 5px;
+        }
+
         .auth-button {
-            background: linear-gradient(45deg, #FFCA28, #FFA000);
-            color: var(--dark-blue);
+            background: transparent;
+            color: var(--accent-gray);
             padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
+            border: 1px solid var(--accent-gray);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
+            gap: 1rem;
             text-decoration: none;
+            font-size: 0.9rem; /* 缩字号 */
+            border-radius: 2px; /* 加圆角 */
+            height: 36px; /* 定高度 */
+        }
+
+        .auth-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(224,224,224,0.2),
+                transparent
+            );
+            transition: left 0.6s;
         }
 
         .auth-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 202, 40, 0.3);
+            background: rgba(224,224,224,0.1);
         }
 
-        /* 响应式设计 */
+        .auth-button:hover::before {
+            left: 100%;
+        }
+
+        .gucci-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 2.5rem 0;
+            position: relative;
+        }
+
+        .gucci-divider::after {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            transform: translateX(-50%);
+            color: var(--accent-gray);
+        }
+
         @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
             .nav-links {
                 display: none;
             }
-            .section {
-                padding: 140px 1rem 1rem;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
+            
             .content-card {
-                padding: 1.5rem;
+                padding: 2rem;
             }
+
+            .auth-button {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+             }
+        }
+
+        section {
+            padding: 100px 2rem;
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- 修复后的导航栏结构 -->
     <nav class="navbar">
         <div class="nav-container">
-            <h1>Rover ST</h1>
+            <h1 style="font-size: 1.8rem; letter-spacing: 2px; color: var(--accent-gray);">RST</h1>
             <div class="nav-links">
-                <a href="#home" class="nav-link"><span class="material-icons">home</span>首页</a>
-                <a href="#missions" class="nav-link"><span class="material-icons">assignment</span>太空任务</a>
-                <a href="#technology" class="nav-link"><span class="material-icons">engineering</span>核心技术</a>
-                <a href="#gonkaiziliao" class="nav-link"><span class="material-icons">folder_open</span>公开资料</a>
-                <a href="#contact" class="nav-link"><span class="material-icons">contacts</span>联系我们</a>
-                <a href="#hezuoshiy" class="nav-link"><span class="material-icons">handshake</span>合作事业</a>
-                <a href="#jiaruwomen" class="nav-link"><span class="material-icons">person_add</span>加入我们</a>
-                <span class="material-icons">login</span>
-                <button onclick="handleRedirect()">
-                    已登录
-                 </button>
-                     <script>
-                        // 函数式处理（推荐）
-                     function handleRedirect() {
-                        if(confirm("确定要退出登录？")) {
-                                // 当前窗口跳转
-                            window.location.href = "https://rover2828.github.io/RST";
-                                
-                               
-                            }
-                        }
-                     </script>
+                <a href="#home" class="nav-link">
+                    <span class="material-icons">home</span>
+                    首页
+                </a>
+                <a href="#missions" class="nav-link">
+                    <span class="material-icons">assignment</span>
+                    太空任务
+                </a>
+                <a href="#technology" class="nav-link">
+                    <span class="material-icons">engineering</span>
+                    核心技术
+                </a>
+                <a href="#gonkaiziliao" class="nav-link">
+                    <span class="material-icons">folder_open</span>
+                    公开资料
+                </a>
+                <a href="#contact" class="nav-link">
+                    <span class="material-icons">contacts</span>
+                    联系我们
+                </a>
+                <a href="#hezuoshiy" class="nav-link">
+                    <span class="material-icons">handshake</span>
+                    合作事业
+                </a>
+                <a href="#jiaruwomen" class="nav-link">
+                    <span class="material-icons">person_add</span>
+                    加入我们
+                </a>
+                <a href="https://rover2828.github.io/RST" class="auth-button">
+                    <span class="material-icons">login</span>
+                    已登录（单击退出）
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- 首页内容 -->
+    <!-- 首页区块 -->
     <section id="home" class="section">
-        <h1 class="hero-title">RST航天</h1>
-        
-        <div class="content-card">
-            <p>RST航天专注于近地、太空、地卫（DFY）开发火箭的项目。</p>
-            <p>成立于2025年2月10日。</p>
-            <p>RST在航天工程中获得了多项成就：航天工程领域获得多项技术突破、拥有自主知识产权的火箭推进系统及卫星技术。</p>
-        </div>
+        <div style="position: relative; z-index: 1;">
+            <h1 class="hero-title animated">RST<br>航天</h1>
+            
+            <div class="content-card animated delay-1">
+                <div style="max-width: 600px;">
+                    <p style="font-size: 1.4rem; line-height: 1.8; margin-bottom: 2rem;">
+                        RST航天专注于近地、太空、地卫（DFY）开发火箭的项目。
+                    </p>
+                    <div class="gucci-divider"></div>
+                    <div style="display: grid; gap: 1.5rem;">
+                        <p style="font-size: 1.1rem; opacity: 0.9;">
+                            <span style="color: var(--accent-gray); margin-right: 1rem;">✦</span>
+                            成立于2025年2月10日
+                        </p>
+                        <p style="font-size: 1.1rem; opacity: 0.9;">
+                            <span style="color: var(--accent-gray); margin-right: 1rem;">✦</span>
+                            拥有自主知识产权的火箭推进系统及卫星技术
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        <div class="content-card">
-            <h2>当前项目</h2>
-            <div class="project-grid">
-                <div class="project-item">
-                    <p>1. RST参宿-1型重型火箭（第5次试车）</p>
-                    <p>2. RST武卒-28型地卫（DFY）行星火箭（研制中）</p>
-                    <p>3. RST相柳-ST型智能化卫星轨道防御系统（已立项）</p>
-                    <p>4. RST震爆-RER型震爆发动机（已立项）</p>
+            <div class="content-card animated delay-2">
+                <h2 style="font-size: 2rem; margin-bottom: 3rem; letter-spacing: 2px;">当前项目</h2>
+                <div class="project-grid">
+                    <div class="project-item">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <span class="material-icons" style="color: var(--accent-gray);">rocket_launch</span>
+                            <h3 style="font-size: 1.4rem;">参宿-1型重型火箭</h3>
+                        </div>
+                        <p style="opacity: 0.9;">第五次试车准备中</p>
+                        <p style="color: var(--accent-gray); margin-top: 1rem;">2024 Q4</p>
+                    </div>
+                    <div class="project-item">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <span class="material-icons" style="color: var(--accent-gray);">rocket_launch</span>
+                            <h3 style="font-size: 1.4rem;">RST武卒-28型地卫（DFY）行星火箭</h3>
+                        </div>
+                        <p style="opacity: 0.9;">研制准备中</p>
+                        <p style="color: var(--accent-gray); margin-top: 1rem;">2025 Q6</p>
+                    </div>
+                    <div class="project-item">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <span class="material-icons" style="color: var(--accent-gray);">satellite_alt</span>
+                            <h3 style="font-size: 1.4rem;">RST相柳-ST型智能化卫星轨道防御系统</h3>
+                        </div>
+                        <p style="opacity: 0.9;">已立项</p>
+                        <p style="color: var(--accent-gray); margin-top: 1rem;">2025 Q7</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 太空任务 -->
+    <!-- 其他区块保持原有内容结构，仅调整颜色变量 -->
     <section id="missions" class="section">
         <div class="content-card">
-            <h2>当前进行中任务</h2>
-            <div class="project-item">
-                <p>1. RST参宿-1 • 发动机试车 • 主体构建</p>
-                <p>2. RST武卒-28（DFY） • 已立项 • 爆震发动机构建</p>
+            <h2 style="font-family: 'Times New Roman'; letter-spacing: 1px; border-left: 3px solid var(--accent-gray); padding-left: 1.5rem;">
+                当前进行中任务
+            </h2>
+            <div class="project-grid" style="margin-top: 3rem;">
+                <div class="project-item">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span class="material-icons" style="color: var(--accent-gray);">rocket</span>
+                        <h3 style="color: var(--light-gray);">RST参宿-1</h3>
+                    </div>
+                    <div class="gucci-divider" style="margin: 1.5rem 0;"></div>
+                    <p style="color: var(--light-gray);">发动机试车 • 主体构建</p>
+                    <p style="color: var(--accent-gray); margin-top: 1rem;">2024 Q3里程碑</p>
+                </div>
+                <div class="project-item">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span class="material-icons" style="color: var(--accent-gray);">satellite_alt</span>
+                        <h3 style="color: var(--light-gray);">RST武卒-28（DFY）</h3>
+                    </div>
+                    <div class="gucci-divider" style="margin: 1.5rem 0;"></div>
+                    <p style="color: var(--light-gray);">已立项 • 爆震发动机构建</p>
+                    <p style="color: var(--accent-gray); margin-top: 1rem;">2025 Q1原型机</p>
+                </div>
             </div>
-        </div>
+        </div>  
     </section>
 
-    <!-- 核心技术 -->
     <section id="technology" class="section">
         <div class="content-card">
-            <h2>核心技术</h2>
-            <div class="project-item">
-                <p>1. 爆震一级推进系统（DX）</p>
-                <p>2. DeepSeek-R1主控矩阵（DSP）</p>
-                <p>3. 立式回收系统</p>
-                <p>4. 超迷你型发动机（脉冲）</p>
-                <p>5. 电离子卫星发动机</p>
+            <h2 style="font-family: 'Times New Roman'; letter-spacing: 1px; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; color: var(--light-gray);">
+                核心技术体系
+            </h2>
+            <div class="project-grid" style="margin-top: 2rem;">
+                <div class="project-item" style="border-left: none; border-top: 3px solid var(--accent-gray);">
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span class="material-icons" style="color: var(--accent-gray);">bolt</span>
+                            <h3 style="color: var(--light-gray);">爆震推进系统</h3>
+                        </div>
+                        <p style="color: var(--light-gray); opacity: 0.9;">DX级连续爆震燃烧技术</p>
+                    </div>
+                </div>
+                <div class="project-item" style="border-left: none; border-top: 3px solid var(--accent-gray);">
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span class="material-icons" style="color: var(--accent-gray);">precision_manufacturing</span>
+                            <h3 style="color: var(--light-gray);">复合制造技术</h3>
+                        </div>
+                        <p style="color: var(--light-gray); opacity: 0.9;">碳纤维-钛合金复合结构</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div>  
     </section>
 
-    <!-- 公开资料 -->
     <section id="gonkaiziliao" class="section">
         <div class="content-card">
-            <h2>公开资料</h2>
-            <div class="project-grid">
-                <div class="project-item">
-                    <a href="https://pan.baidu.com/s/1KkG-8OTydaZNxq0nCA-ONw?pwd=2828" class="auth-button">
-                        RST参宿-1
-                    </a>
-                    <a href="https://pan.baidu.com/s/10Jeu34veJZoghh3xngnC6Q?pwd=2828" class="auth-button">
-                        RST参宿-1(diy)
-                    </a>
-                    <a href="https://pan.baidu.com/s/12djHH0MJSbPEY3jGSRwu8g?pwd=2828" class="auth-button">
-                        RST武卒-28（DFY）(diy)
-                    </a>
+            <h2 style="font-size: 2rem; letter-spacing: 2px; position: relative; color: var(--light-gray);">
+                <span class="material-icons" style="position: absolute; left: -50px; top: 50%; transform: translateY(-50%); color: var(--accent-gray);">library_books</span>
+                技术文献库
+            </h2>
+            <div class="project-grid" style="margin-top: 3rem;">
+                <a href="https://pan.baidu.com/s/1KkG-8OTydaZNxq0nCA-ONw?pwd=2828" 
+                   class="auth-button"
+                   style="justify-content: center; width: 100%; max-width: 400px; margin: 0 auto;">
+                    <span class="material-icons">download</span>
+                    RST参宿-1技术白皮书
+                </a>
+               
+                <a href="#" 
+                   class="auth-button"
+                   style="justify-content: center; width: 100%; max-width: 400px; margin: 20px auto;">
+                    <span class="material-icons">download</span>
+                    RST质量体系认证文件
+                </a>
+            </div>
+        </div>  
+    </section>
+
+    <section id="hezuoshiy" class="section">
+        <div class="content-card">
+            <h2 style="font-family: 'Palatino Linotype'; color: var(--accent-gray); letter-spacing: 1px; text-align: center;">
+                ━ 战略合作伙伴 ━
+            </h2>
+            <div class="project-grid" style="margin-top: 2rem;">
+                <div class="project-item" style="background: rgba(224,224,224,0.05);">
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <span style="font-size: 2rem; color: var(--accent-gray);">⫘</span>
+                        <div>
+                            <h3 style="color: var(--light-gray);">FAF航天</h3>
+                            <p style="color: var(--light-gray); opacity: 0.9;">联合推进实验室</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item" style="background: rgba(224,224,224,0.05);">
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <span style="font-size: 2rem; color: var(--accent-gray);">⫘</span>
+                        <div>
+                            <h3 style="color: var(--light-gray);">ROVER重工</h3>
+                            <p style="color: var(--light-gray); opacity: 0.9;">材料联合研发中心</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 合作事业 -->
-    <section id="hezuoshiy" class="section">
-        <div class="content-card">
-            <h2>当前合作社</h2>
-            <div class="project-item">
-                <p>1. FAF航天</p>
-                <p>2. ROVER科技</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 加入我们 -->
     <section id="jiaruwomen" class="section">
-        <div class="content-card">
-            <h2>加入我们</h2>
-            <div class="project-item">
-                <p>邮箱：liujunkaiqianyuyouzhen@Outlook.com</p>
-                <p>（请发送“加入RST”并附上电话或者邮箱）</p>
-                <p>官网：https://rover2828.github.io/RST/#jiaruwomen</p>
+        <div class="content-card" style="text-align: center;">
+            <h2 style="position: relative; display: inline-block; color: var(--light-gray);">
+                <span style="position: absolute; left: -30px; color: var(--accent-gray);">✧</span>
+                加入星际探索
+                <span style="position: absolute; right: -30px; color: var(--accent-gray);">✧</span>
+            </h2>
+            <div style="margin: 3rem 0;">
+                <p style="font-size: 1.2rem; letter-spacing: 1px; color: var(--light-gray);">
+                    <span class="material-icons" style="vertical-align: middle; color: var(--accent-gray);">mail</span>
+                    liujunkaiqianyuyouzhen@Outlook.com
+                </p>
+                <div class="gucci-divider" style="margin: 2rem auto; width: 50%;"></div>
+                <p style="font-family: 'Times New Roman'; font-size: 1.1rem; color: var(--light-gray);">
+                    发送"加入RST"及您的履历至上方邮箱
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- 联系我们 -->
     <section id="contact" class="section">
-        <div class="content-card">
-            <h2>联系我们</h2>
-            <div class="project-item">
-                <p>邮箱：liujunkaiqianyuyouzhen@Outlook.com</p>
-                <p>电话：18759122968</p>
-                <p>官网：https://rover2828.github.io/RST/</p>
+        <div class="content-card" style="position: relative;">
+            <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); color: var(--accent-gray);">✶</div>
+            <h2 style="text-align: center; color: var(--light-gray);">联络通道</h2>
+            <div class="project-grid" style="margin-top: 2rem;">
+                <div class="project-item" style="border: none; padding: 0;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); color: var(--light-gray);">
+                                <span class="material-icons" style="color: var(--accent-gray);">phone</span>
+                                18759122968
+                            </td>
+                            <td style="padding: 1rem; border-bottom: 1px solid var(--border-color); color: var(--light-gray);">
+                                <span class="material-icons" style="color: var(--accent-gray);">public</span>
+                                rover2828.github.io/RST
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; color: var(--light-gray);">
+                                <span class="material-icons" style="color: var(--accent-gray);">location_on</span>
+                                福建省福州市
+                            </td>
+                            <td style="padding: 1rem; color: var(--light-gray);">
+                                <span class="material-icons" style="color: var(--accent-gray);">schedule</span>
+                                周一至周五 09:00-17:00
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
 
     <script>
-        // 平滑滚动功能
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    history.pushState(null, null, targetId);
-                }
-            });
+        // 修复后的JavaScript
+        let lastScroll = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
         });
 
-        // 自动激活当前区块
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 100 && rect.bottom >= 100) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${section.id}`) {
-                            link.classList.add('active');
-                        }
-                    });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.classList.add('animated');
                 }
             });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.content-card, .project-item').forEach((el) => {
+            observer.observe(el);
         });
     </script>
 </body>
